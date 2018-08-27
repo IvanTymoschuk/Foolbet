@@ -13,6 +13,7 @@ namespace FoolBet
         public Team TeamAway { get; set; }
         public DateTime MatchTime { get; set; }
         public List<BetProperties> Properties { get; set; }
+        public List<UserBet> userBets { get; set; }
 
     }
 }

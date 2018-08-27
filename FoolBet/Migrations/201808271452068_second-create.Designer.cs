@@ -7,13 +7,13 @@ namespace FoolBet.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class firstCreate : IMigrationMetadata
+    public sealed partial class secondcreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(firstCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(secondcreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808271428512_firstCreate"; }
+            get { return "201808271452068_second-create"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ namespace FoolBet.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class firstCreate : DbMigration
+    public partial class secondcreate : DbMigration
     {
         public override void Up()
         {
@@ -38,15 +38,12 @@ namespace FoolBet.Migrations
                         MatchTime = c.DateTime(nullable: false),
                         TeamAway_ID = c.Int(),
                         TeamHome_ID = c.Int(),
-                        UserBet_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Teams", t => t.TeamAway_ID)
                 .ForeignKey("dbo.Teams", t => t.TeamHome_ID)
-                .ForeignKey("dbo.UserBets", t => t.UserBet_ID)
                 .Index(t => t.TeamAway_ID)
-                .Index(t => t.TeamHome_ID)
-                .Index(t => t.UserBet_ID);
+                .Index(t => t.TeamHome_ID);
             
             CreateTable(
                 "dbo.BetProperties",
@@ -98,24 +95,40 @@ namespace FoolBet.Migrations
                 .ForeignKey("dbo.Teams", t => t.Team_ID)
                 .Index(t => t.Team_ID);
             
+            CreateTable(
+                "dbo.MatchUserBets",
+                c => new
+                    {
+                        Match_ID = c.Int(nullable: false),
+                        UserBet_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Match_ID, t.UserBet_ID })
+                .ForeignKey("dbo.Matches", t => t.Match_ID, cascadeDelete: true)
+                .ForeignKey("dbo.UserBets", t => t.UserBet_ID, cascadeDelete: true)
+                .Index(t => t.Match_ID)
+                .Index(t => t.UserBet_ID);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.UserBets", "Accounts_ID", "dbo.Accounts");
-            DropForeignKey("dbo.Matches", "UserBet_ID", "dbo.UserBets");
+            DropForeignKey("dbo.MatchUserBets", "UserBet_ID", "dbo.UserBets");
+            DropForeignKey("dbo.MatchUserBets", "Match_ID", "dbo.Matches");
             DropForeignKey("dbo.Matches", "TeamHome_ID", "dbo.Teams");
             DropForeignKey("dbo.Matches", "TeamAway_ID", "dbo.Teams");
             DropForeignKey("dbo.Players", "Team_ID", "dbo.Teams");
             DropForeignKey("dbo.Teams", "League_ID", "dbo.Leagues");
             DropForeignKey("dbo.BetProperties", "Match_ID", "dbo.Matches");
+            DropIndex("dbo.MatchUserBets", new[] { "UserBet_ID" });
+            DropIndex("dbo.MatchUserBets", new[] { "Match_ID" });
             DropIndex("dbo.Players", new[] { "Team_ID" });
             DropIndex("dbo.Teams", new[] { "League_ID" });
             DropIndex("dbo.BetProperties", new[] { "Match_ID" });
-            DropIndex("dbo.Matches", new[] { "UserBet_ID" });
             DropIndex("dbo.Matches", new[] { "TeamHome_ID" });
             DropIndex("dbo.Matches", new[] { "TeamAway_ID" });
             DropIndex("dbo.UserBets", new[] { "Accounts_ID" });
+            DropTable("dbo.MatchUserBets");
             DropTable("dbo.Players");
             DropTable("dbo.Leagues");
             DropTable("dbo.Teams");
