@@ -18,7 +18,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        
+                        <TextBlock Text="{Binding TeamHome}"></TextBlock>
+                        <TextBlock Text="{Binding TeamAway}"></TextBlock>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

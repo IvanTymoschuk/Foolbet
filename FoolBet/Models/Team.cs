@@ -10,12 +10,14 @@ namespace FoolBet
     {
         public Team()
         {
-            Players = new List<Player>();
+            //Players = new List<Player>();
+         
         }
         public int ID { get; set; }
         public string Name { get; set; }
+        public Match Match { get; set; }    
         public League League  { get; set; }
         public string Coach { get; set; }
-        public List<Player> Players { get; set; }
+       // public List<Player> Players { get; set; }
     }
 }

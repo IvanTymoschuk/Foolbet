@@ -20,10 +20,14 @@ namespace FoolBet
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+       MainDB db = new MainDB();
         public MainWindow()
         {
+          
+
             InitializeComponent();
+         //lbMatches.ItemsSource = db.Matches.ToList();
+         MessageBox.Show(db.Matches.ToList().First().TeamAway.Coach);
         }
     }
 }

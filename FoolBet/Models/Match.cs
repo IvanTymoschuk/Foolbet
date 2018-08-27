@@ -12,8 +12,12 @@ namespace FoolBet
         public Team TeamHome { get; set; }
         public Team TeamAway { get; set; }
         public DateTime MatchTime { get; set; }
-        public List<BetProperties> Properties { get; set; }
-        public List<UserBet> userBets { get; set; }
+
+
+        public double FirstWin { get; set; }
+        public double SecondWin { get; set; }
+        public double Draw { get; set; }
+        //public List<UserBet> userBets { get; set; }
 
     }
 }
