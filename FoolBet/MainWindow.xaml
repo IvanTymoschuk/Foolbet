@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoolBet"
         mc:Ignorable="d"
-        Title="FoolBet" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" >
+        Title="FoolBet" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background=" WhiteSmoke">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"></RowDefinition>
@@ -21,7 +21,12 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <ListBox Name="lbLeagues"  >
+            <StackPanel Margin="5">
+               
+                    <Button FontSize="20" Click="ButtonBase_OnClick">ALL Leagues</Button>
+                    
+                
+            <ListBox Name="lbLeagues" SelectionChanged="LbLeagues_OnSelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -33,7 +38,17 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        <ListBox Grid.Column="1" Name="lbMatches" Grid.Row="1" >
+
+            </StackPanel>
+            <StackPanel Margin="5" Grid.Column="1" >
+                <Border BorderThickness="1" BorderBrush="Black">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="15">Sorting by:</Label>
+                        <Button Width="75" Name="btnSortDate" Click="BtnSortDate_OnClick" FontSize="15">Date</Button>
+                        <Button Width="75" Name="btnSortLeag" Click="BtnSortLeag_OnClick"  FontSize="15">League</Button>
+                    </StackPanel>
+                </Border>
+                <ListBox Name="lbMatches" Grid.Row="1" Background="FloralWhite">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid >
@@ -49,12 +64,12 @@
                             </Border>
                             <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
 
-                                <TextBlock VerticalAlignment="Center" FontSize="18" Margin="5"  Grid.Column="1" Text="{Binding TeamHome.League.Name}"></TextBlock>
+                                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Width="50" FontSize="18" Margin="5"  Grid.Column="1" Text="{Binding TeamHome.League.Name}"></TextBlock>
                             </Border>
-                            <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1">
+                            <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1" Width="200">
 
                                 <StackPanel Grid.Column="2" Margin="5">
-                                    <TextBlock FontSize="14" >
+                                    <TextBlock FontSize="14"  >
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} ({1})">
                                                 <Binding Path="TeamHome.Name" />
@@ -72,15 +87,12 @@
                                     </TextBlock>
                                 </StackPanel>
                             </Border>
-                            <Border Grid.Column="3" BorderBrush="Black" BorderThickness="1">
-                                <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    <TextBlock Text="{Binding Coef.Name}"></TextBlock>
-                                </ListBox>
-                            </Border>
+                          
                         </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

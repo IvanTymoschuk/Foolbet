@@ -20,18 +20,47 @@ namespace FoolBet
     /// </summary>
     public partial class MainWindow : Window
     {
-      
+            MainDB db = new MainDB();
+
         public MainWindow()
         {
 
-            MainDB db = new MainDB();
             InitializeComponent();
-
+           
             lbMatches.ItemsSource = db.Matches.ToList();
-            lbLeagues.ItemsSource = db.Leagues.ToList();
-          
-          
+     
 
+            lbLeagues.ItemsSource = db.Leagues.ToList();
+
+
+
+
+        }
+
+        private void LbLeagues_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           var t = db.Matches.ToList().Where(x => x.TeamHome.League.Equals(lbLeagues.SelectedItem as League));
+
+            lbMatches.ItemsSource = t;
+
+            //lbMatches.ItemsSource = tmp;
+
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbMatches.ItemsSource = db.Matches.ToList();
+        }
+
+
+        private void BtnSortDate_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbMatches.ItemsSource = db.Matches.ToList().OrderBy(x => x.MatchDate);
+        }
+
+        private void BtnSortLeag_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbMatches.ItemsSource = db.Matches.ToList().OrderBy(x => x.TeamHome.League.Name);
 
         }
     }
