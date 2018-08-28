@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace FoolBet
 {
-    public class BetProperties
+    public class Coeficient
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public double Coef { get; set; }
-       
+
+        public double Value { get; set; }
+        virtual public Match Match { get; set; }
+
     }
 }

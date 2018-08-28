@@ -14,16 +14,73 @@
         
         </Grid.RowDefinitions>
         <Label Foreground="Blue" FontSize="65" HorizontalAlignment="Center" FontStyle="Italic" FontWeight="DemiBold">FoolBet.com</Label>
-        <ListBox Name="lbMatches" Grid.Row="1">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Name="lbLeagues"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock FontSize="20" Text="{Binding Name}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Country}"></TextBlock>
+                        </StackPanel>
+                        
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        <ListBox Grid.Column="1" Name="lbMatches" Grid.Row="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding TeamHome}"></TextBlock>
-                        <TextBlock Text="{Binding TeamAway}"></TextBlock>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
 
-                    </StackPanel>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Margin="5" VerticalAlignment="Center" FontSize="14" Text="{Binding MatchDate}"></TextBlock>
+                            </Border>
+                            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1">
+
+                                <TextBlock VerticalAlignment="Center" FontSize="18" Margin="5"  Grid.Column="1" Text="{Binding TeamHome.League.Name}"></TextBlock>
+                            </Border>
+                            <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1">
+
+                                <StackPanel Grid.Column="2" Margin="5">
+                                    <TextBlock FontSize="14" >
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} ({1})">
+                                                <Binding Path="TeamHome.Name" />
+                                                <Binding Path="TeamHome.League.Country" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" >
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} ({1})">
+                                                <Binding Path="TeamAway.Name" />
+                                                <Binding Path="TeamAway.League.Country" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="3" BorderBrush="Black" BorderThickness="1">
+                                <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <TextBlock Text="{Binding Coef.Name}"></TextBlock>
+                                </ListBox>
+                            </Border>
+                        </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        </Grid>
     </Grid>
 </Window>

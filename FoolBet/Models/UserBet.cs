@@ -9,8 +9,8 @@ namespace FoolBet
     public class UserBet
     {
         public int ID { get; set; }
-        public List<Match> Matches { get; set; }
+        virtual public Coeficient Coef { get; set; }
         public double Price { get; set; }
-        public DateTime Date { get; set; }
+        virtual public Accounts Accounts { get; set; }
     }
 }

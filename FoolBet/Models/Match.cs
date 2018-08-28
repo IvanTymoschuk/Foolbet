@@ -8,16 +8,18 @@ namespace FoolBet
 {
     public class Match
     {
+        public Match()
+        {
+            Coefs = new List<Coeficient>();
+        }
         public int ID { get; set; }
-        public Team TeamHome { get; set; }
-        public Team TeamAway { get; set; }
-        public DateTime MatchTime { get; set; }
+        virtual public Team TeamHome { get; set; }
+        virtual public Team TeamAway { get; set; }
+        public DateTime MatchDate { get; set; }
+        public string Score { get; set; }
 
 
-        public double FirstWin { get; set; }
-        public double SecondWin { get; set; }
-        public double Draw { get; set; }
-        //public List<UserBet> userBets { get; set; }
+        virtual public List<Coeficient> Coefs { get; set; }
 
     }
 }

@@ -17,7 +17,7 @@ namespace FoolBet
         {
         }
         public virtual DbSet<Accounts> Accounts { get; set; }
-        public virtual DbSet<BetProperties> BetProperties { get; set; }
+        public virtual DbSet<Coeficient> Coefs { get; set; }
         public virtual DbSet<League> Leagues { get; set; }
         public virtual DbSet<Match> Matches { get; set; }
         public virtual DbSet<Player> Players { get; set; }

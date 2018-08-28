@@ -10,7 +10,7 @@ namespace FoolBet
     {
         public int ID { get; set; }
         public string FullName { get; set; }
-        public Team Team { get; set; }
+        virtual public Team Team { get; set; }
         public string Country { get; set; }
         public string Position { get; set; }
     }

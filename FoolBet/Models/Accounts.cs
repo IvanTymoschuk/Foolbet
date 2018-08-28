@@ -16,7 +16,7 @@ namespace FoolBet
         public string Email { get; set; }
         public string Password { get; set; }
         public decimal Money { get; set; }
-        public List<UserBet> Bets { get; set; }
+        virtual public List<UserBet> Bets { get; set; }
 
 
     }
