@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoolBet"
         mc:Ignorable="d"
-        Title="Registration" Height="330" Width="600" FontSize="20" FontFamily="Verdana" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Registration" Height="330" Width="600" FontSize="20"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             
@@ -19,18 +22,18 @@
         <TextBlock Grid.Row="0" Text="LOGIN: "  VerticalAlignment="Center"
                    HorizontalAlignment="Left" TextAlignment="Right" Margin="10" />
         <TextBox Grid.Row="0" Name="tbLogin" 
-                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left" Padding="10" VerticalAlignment="Center"/>
+                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left"  VerticalAlignment="Center"/>
 
 
         <TextBlock Text="PASSWORD: " Grid.Row="1" VerticalAlignment="Center" 
                    HorizontalAlignment="Left" Margin="10"  />
-        <PasswordBox  Grid.Row="1" Name="pbPass" HorizontalAlignment="Right" Width="370" Padding="10" VerticalAlignment="Center"/>
+        <PasswordBox  Grid.Row="1" Name="pbPass" HorizontalAlignment="Right" Width="370" VerticalAlignment="Center"/>
 
 
         <TextBlock Text="MONEY: "  Grid.Row="2" VerticalAlignment="Center"  
                    HorizontalAlignment="Left" TextAlignment="Right" Margin="10" />
-        <TextBox Grid.Row="2" Name="tbMoney" 
-                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left" Padding="10" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Name="tbMoney"  
+                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left"  VerticalAlignment="Center"/>
 
 
         <Button  Grid.Row="3" Name="reg_btn" Width="150" Margin="10" 

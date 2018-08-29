@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoolBet"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MatchWindow" ResizeMode="NoResize" Height="300" Width="550" WindowStartupLocation="CenterScreen"  Background=" WhiteSmoke" ShowInTaskbar="False" FontFamily="Verdana">
+        Title="MatchWindow" ResizeMode="NoResize" Height="300" Width="550" WindowStartupLocation="CenterScreen"  Background=" WhiteSmoke" ShowInTaskbar="False" >
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
