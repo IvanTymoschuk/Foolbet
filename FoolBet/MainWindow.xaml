@@ -18,7 +18,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="0.6*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="5">
@@ -49,7 +49,7 @@
                         <Button Width="75" Name="btnSortLeag" Click="BtnSortLeag_OnClick"  FontSize="15">League</Button>
                     </StackPanel>
                 </Border>
-                <ListBox Name="lbMatches" Grid.Row="1" Background="FloralWhite">
+                <ListBox Name="lbMatches" Grid.Row="1" Background="FloralWhite" MouseDoubleClick="lbMatches_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid >
@@ -118,6 +118,7 @@
 
                         <TextBlock Grid.Row="1" FontSize="20" VerticalAlignment="Center" Width="100">Open bets:</TextBlock>
                         <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="20" Name="tbOpenBetsBal"  HorizontalAlignment="Center">bal</TextBlock>
+                        <Button Grid.Column="2" Grid.Row="1" FontSize="20" Padding="5" Margin="5" HorizontalAlignment="Right" Width="100">Pay out</Button>
 
 
                         <ListBox Name="lbUserBets" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,20,0,0" >
@@ -161,20 +162,20 @@
                                                 </TextBlock>
                                             </StackPanel>
                                         </Border>
-                                        <Border Grid.Column="3" BorderBrush="Black" BorderThickness="1" Width="200">
+                                        <Border Grid.Column="3" BorderBrush="Black" BorderThickness="1" Width="180">
                                             
                                             <TextBlock TextAlignment="Center" VerticalAlignment="Center">
                                                 <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}{0} ({1}) {2:C}">
+                                                    <MultiBinding StringFormat="{}{0} ({1})">
                                                         <Binding Path="Coef.Name" />
                                                         <Binding Path="Coef.Value" />
                                                     </MultiBinding>
                                                 </TextBlock.Text>
                                             </TextBlock>
                                         </Border>
-                                        <Border Grid.Column="3" BorderBrush="Black" BorderThickness="1" Width="200">
+                                        <Border Grid.Column="4" BorderBrush="Black" BorderThickness="1" Width="120">
 
-                                            <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Price,StringFormat={}{0:C}}" >
+                                            <TextBlock  TextAlignment="Center" VerticalAlignment="Center" Text="{Binding Price,StringFormat={}{0:C}}" >
                                                 </TextBlock>
                                         </Border>
                                     </Grid>

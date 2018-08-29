@@ -44,6 +44,7 @@ namespace FoolBet
             tbBalance.Text = acc.Money.ToString("C");           
             tbOpenBetsBal.Text = acc.Bets.Sum(x => x.Price).ToString("C");
             lbUserBets.ItemsSource = acc.Bets.ToList();
+    
 
         }
 
@@ -72,6 +73,14 @@ namespace FoolBet
         private void BtnSortLeag_OnClick(object sender, RoutedEventArgs e)
         {
             lbMatches.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("TeamHome.League.Name", System.ComponentModel.ListSortDirection.Ascending));
+        }
+
+        private void lbMatches_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Match match = (lbMatches.SelectedItem as Match);
+            MatchWindow mw = new MatchWindow(match);
+            mw.ShowDialog();
+
         }
     }
 }

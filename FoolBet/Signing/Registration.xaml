@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoolBet"
         mc:Ignorable="d"
-        Title="Registration" Height="320" Width="600" FontSize="20" FontFamily="Verdana">
+        Title="Registration" Height="320" Width="600" FontSize="20" FontFamily="Verdana" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             
