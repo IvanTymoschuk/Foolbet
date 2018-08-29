@@ -19,11 +19,14 @@ namespace FoolBet
     /// Interaction logic for MatchWindow.xaml
     /// </summary>
     public partial class MatchWindow : Window
-    { Match Match;
-        public MatchWindow(Match match)
+    {
+        private Accounts account;
+        public MatchWindow(Match match,Accounts acc)
         {
             InitializeComponent();
-            Match = match;
+            MainGrid.Visibility = Visibility.Hidden;
+
+            account = acc;
             this.Title = match.TeamHome.Name + " - " + match.TeamAway.Name;
             dgMatchCoefs.ItemsSource = match.Coefs;
             
@@ -33,8 +36,8 @@ namespace FoolBet
             var textBox = sender as TextBox;
             
             e.Handled = Regex.IsMatch(e.Text, "[^0-9.]+");
-            if(tbValueBet.Text != "")
-            tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();
+            
+            
 
         }
 
@@ -46,9 +49,44 @@ namespace FoolBet
 
         private void dgMatchCoefs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tbValueBet.Text !="Price")
-            tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();
+            if(dgMatchCoefs.SelectedItem==null)
+                MainGrid.Visibility = Visibility.Hidden;
+            MainGrid.Visibility = Visibility.Visible;
+
+            tbValueBet.Text = "0";
+            tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();         
             tbNameBet.Text = (dgMatchCoefs.SelectedItem as Coeficient).Name + "  (" + (dgMatchCoefs.SelectedItem as Coeficient).Value + ")";
         }
+
+        private void TbValueBet_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbValueBet.Text != null&& dgMatchCoefs.SelectedItem!=null&&!tbValueBet.Text.Contains(".\0"))
+                tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (account.Money < decimal.Parse(tbValueBet.Text))
+            {
+                MessageBox.Show("Not enough money to make bet");
+                return;
+            }
+            using (MainDB db = new MainDB())
+            {
+                UserBet ub = new UserBet()
+                {
+                    Accounts = account, Coef = (dgMatchCoefs.SelectedItem as Coeficient),
+                    Price = double.Parse(tbValueBet.Text)
+                };
+
+                db.UserBets.Add(ub);
+                db.SaveChanges();
+                
+            }
+
+            MessageBox.Show("Bet made!");
+            this.Close();
+        }
+    
     }
 }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoolBet"
         mc:Ignorable="d"
-        Title="MatchWindow" ResizeMode="NoResize" Height="300" Width="550" WindowStartupLocation="CenterScreen"  Background=" WhiteSmoke">
-    <Grid Name="MainGrid">
+        Title="MatchWindow" ResizeMode="NoResize" Height="300" Width="550" WindowStartupLocation="CenterScreen"  Background=" WhiteSmoke" ShowInTaskbar="False" FontFamily="Verdana">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.2*"></RowDefinition>
@@ -21,7 +21,7 @@
               
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Name="MainGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -29,13 +29,13 @@
                 <ColumnDefinition></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <TextBlock Name="tbNameBet"></TextBlock>
-            <TextBox Grid.Column="1" Name="tbValueBet" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" PreviewTextInput="TextBox_PreviewTextInput" GotFocus="tbValueBet_GotFocus">Price</TextBox>
+            <TextBlock Name="tbNameBet"  VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+            <TextBox Grid.Column="1" Name="tbValueBet" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TbValueBet_OnTextChanged" GotFocus="tbValueBet_GotFocus" Text="Price"></TextBox>
             <StackPanel Grid.Column="2">
                 <TextBlock TextAlignment="Center">Gain:</TextBlock>
-                <TextBlock FontSize="18" Name="tbGain"></TextBlock>
+                <TextBlock FontSize="18" VerticalAlignment="Center" TextAlignment="Center" Name="tbGain"></TextBlock>
             </StackPanel>
-            <Button Grid.Column="3">Make bet</Button>
+            <Button Grid.Column="3" Click="Button_Click">Make bet</Button>
         </Grid>
     </Grid>
 </Window>

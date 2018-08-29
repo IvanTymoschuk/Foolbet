@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoolBet"
         mc:Ignorable="d"
-        Title="Registration" Height="320" Width="600" FontSize="20" FontFamily="Verdana" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="Registration" Height="330" Width="600" FontSize="20" FontFamily="Verdana" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             
             <RowDefinition Height="75" />
@@ -17,25 +17,25 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="LOGIN: "  VerticalAlignment="Center"
-                   HorizontalAlignment="Left" TextAlignment="Right" />
+                   HorizontalAlignment="Left" TextAlignment="Right" Margin="10" />
         <TextBox Grid.Row="0" Name="tbLogin" 
-                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left"/>
+                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left" Padding="10" VerticalAlignment="Center"/>
 
 
         <TextBlock Text="PASSWORD: " Grid.Row="1" VerticalAlignment="Center" 
-                   HorizontalAlignment="Left" />
-        <PasswordBox  Grid.Row="1" Name="pbPass" HorizontalAlignment="Right" Width="370"/>
+                   HorizontalAlignment="Left" Margin="10"  />
+        <PasswordBox  Grid.Row="1" Name="pbPass" HorizontalAlignment="Right" Width="370" Padding="10" VerticalAlignment="Center"/>
 
 
         <TextBlock Text="MONEY: "  Grid.Row="2" VerticalAlignment="Center"  
-                   HorizontalAlignment="Left" TextAlignment="Right"  />
+                   HorizontalAlignment="Left" TextAlignment="Right" Margin="10" />
         <TextBox Grid.Row="2" Name="tbMoney" 
-                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left" />
-        
-          
-        <Button  Grid.Row="3" Name="reg_btn" Width="150"
+                 HorizontalAlignment="Right" Width="370"  TextAlignment="Left" Padding="10" VerticalAlignment="Center"/>
+
+
+        <Button  Grid.Row="3" Name="reg_btn" Width="150" Margin="10" 
                 HorizontalAlignment="Left" Content="Sign up" Click="Reg_btn_OnClick" />
-        <Button  Grid.Row="3" Width="150" Name="close_btn" HorizontalAlignment="Right"
+        <Button  Grid.Row="3" Width="150" Name="close_btn" Margin="10"  HorizontalAlignment="Right"
                 Content="Cancel" Click="Close_btn_OnClick" />
     </Grid>
 </Window>

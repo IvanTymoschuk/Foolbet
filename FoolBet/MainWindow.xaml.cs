@@ -22,12 +22,12 @@ namespace FoolBet
     public partial class MainWindow : Window
     {
             MainDB db = new MainDB();
-
+        private Accounts account;
         public MainWindow(Accounts acc)
         {
 
             InitializeComponent();
-           
+            account = acc;
             lbMatches.ItemsSource = db.Matches.ToList();
             lbLeagues.ItemsSource = db.Leagues.ToList();
 
@@ -78,8 +78,9 @@ namespace FoolBet
         private void lbMatches_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Match match = (lbMatches.SelectedItem as Match);
-            MatchWindow mw = new MatchWindow(match);
+            MatchWindow mw = new MatchWindow(match,account);
             mw.ShowDialog();
+            RefreshAccCard(account);
 
         }
     }
