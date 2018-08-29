@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,18 +23,27 @@ namespace FoolBet
     {
             MainDB db = new MainDB();
 
-        public MainWindow()
+        public MainWindow(Accounts acc)
         {
 
             InitializeComponent();
            
             lbMatches.ItemsSource = db.Matches.ToList();
-     
-
             lbLeagues.ItemsSource = db.Leagues.ToList();
 
+            RefreshAccCard(acc);
 
 
+
+
+        }
+
+        public void RefreshAccCard(Accounts acc)
+        {
+            tbAccName.Text = String.Format("My Account Card (" + acc.Email + ")");
+            tbBalance.Text = acc.Money.ToString("C");           
+            tbOpenBetsBal.Text = acc.Bets.Sum(x => x.Price).ToString("C");
+            lbUserBets.ItemsSource = acc.Bets.ToList();
 
         }
 
@@ -55,13 +65,13 @@ namespace FoolBet
 
         private void BtnSortDate_OnClick(object sender, RoutedEventArgs e)
         {
-            lbMatches.ItemsSource = db.Matches.ToList().OrderBy(x => x.MatchDate);
+            lbMatches.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("MatchDate", System.ComponentModel.ListSortDirection.Ascending));
+            
         }
 
         private void BtnSortLeag_OnClick(object sender, RoutedEventArgs e)
         {
-            lbMatches.ItemsSource = db.Matches.ToList().OrderBy(x => x.TeamHome.League.Name);
-
+            lbMatches.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("TeamHome.League.Name", System.ComponentModel.ListSortDirection.Ascending));
         }
     }
 }

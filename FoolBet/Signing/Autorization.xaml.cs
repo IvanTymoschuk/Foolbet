@@ -33,7 +33,7 @@ namespace FoolBet
                 MessageBox.Show("Login not found");
                 return;
             }
-            MainWindow mw = new MainWindow();
+            MainWindow mw = new MainWindow(acc);
             
             if (acc.Password == Pass.Password)
             {
