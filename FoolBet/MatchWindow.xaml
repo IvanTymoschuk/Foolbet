@@ -25,6 +25,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1" Name="MainGrid">
+       
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -33,10 +34,10 @@
 
             </Grid.ColumnDefinitions>
             <TextBlock Name="tbNameBet"  VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
-            <TextBox Grid.Column="1" Name="tbValueBet" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="TbValueBet_OnTextChanged" GotFocus="tbValueBet_GotFocus" Text="Price"></TextBox>
+            <TextBox Grid.Column="1" Name="tbValueBet" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" TextChanged="TbValueBet_OnTextChanged" PreviewTextInput="TextBox_PreviewTextInput" GotFocus="tbValueBet_GotFocus" Text="Price"></TextBox>
             <StackPanel Grid.Column="2">
                 <TextBlock TextAlignment="Center">Gain:</TextBlock>
-                <TextBlock FontSize="18" VerticalAlignment="Center" TextAlignment="Center" Name="tbGain"></TextBlock>
+                <TextBlock  FontSize="18" VerticalAlignment="Center" TextAlignment="Center" Name="tbGain"></TextBlock>
             </StackPanel>
             <Button Grid.Column="3" Click="Button_Click">Make bet</Button>
         </Grid>

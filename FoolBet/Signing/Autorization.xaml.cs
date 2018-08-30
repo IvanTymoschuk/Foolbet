@@ -19,7 +19,7 @@ namespace FoolBet
     /// </summary>
     public partial class Autorization : Window
     {
-        MainDB db = new MainDB();
+       // MainDB db = new MainDB();
         public Autorization()
         {
             InitializeComponent();
@@ -27,23 +27,27 @@ namespace FoolBet
 
         private void Login_btn_OnClick(object sender, RoutedEventArgs e)
         {
-            Accounts acc = db.Accounts.FirstOrDefault(x => x.Email == Login.Text);
-            if (acc == null)
+            using (MainDB db = new MainDB())
             {
-                MessageBox.Show("Login not found");
-                return;
-            }
-            MainWindow mw = new MainWindow(acc);
-            
-            if (acc.Password == Pass.Password)
-            {
-                
-                this.Close();
-                mw.Show();
-            }
-            else
-            {
-                MessageBox.Show("Password is in corrected");
+                Accounts acc = db.Accounts.FirstOrDefault(x => x.Email == Login.Text);
+                if (acc == null)
+                {
+                    MessageBox.Show("Login not found");
+                    //return;
+                }
+
+                MainWindow mw = new MainWindow(acc);
+
+                if (acc.Password == Pass.Password)
+                {
+
+                    this.Close();
+                    mw.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Password is in corrected");
+                }
             }
         }
 

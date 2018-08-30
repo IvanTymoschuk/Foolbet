@@ -21,15 +21,20 @@ namespace FoolBet
     /// </summary>
     public partial class MainWindow : Window
     {
-            MainDB db = new MainDB();
-        private Accounts account;
+        //    MainDB db = new MainDB();
+        public Accounts account;
         public MainWindow(Accounts acc)
         {
 
             InitializeComponent();
+            
             account = acc;
-            lbMatches.ItemsSource = db.Matches.ToList();
-            lbLeagues.ItemsSource = db.Leagues.ToList();
+            AccCard.DataContext = account;
+            using (MainDB db = new MainDB())
+            {
+                lbMatches.ItemsSource = db.Matches.Include("TeamHome").Include("TeamAway").ToList();
+                lbLeagues.ItemsSource = db.Leagues.ToList();
+            }
 
             RefreshAccCard(acc);
 
@@ -41,26 +46,39 @@ namespace FoolBet
         public void RefreshAccCard(Accounts acc)
         {
             tbAccName.Text = String.Format("My Account Card (" + acc.Email + ")");
-            tbBalance.Text = acc.Money.ToString("C");           
+            //tbBalance.Text = acc.Money.ToString("C");           
             tbOpenBetsBal.Text = acc.Bets.Sum(x => x.Price).ToString("C");
             lbUserBets.ItemsSource = acc.Bets.ToList();
-    
+        }
+
+        public void GetBets()
+        {
+            using (MainDB db = new MainDB())
+            {
+                db.Accounts.Attach(account);
+                lbUserBets.ItemsSource  = account.Bets.ToList();
+            }
 
         }
 
+
         private void LbLeagues_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           var t = db.Matches.ToList().Where(x => x.TeamHome.League.Equals(lbLeagues.SelectedItem as League));
-
-            lbMatches.ItemsSource = t;
-
+            using (MainDB db = new MainDB())
+            {
+                var t = db.Matches.ToList().Where(x => x.TeamHome.League.Equals(lbLeagues.SelectedItem as League));
+                lbMatches.ItemsSource = t;
+            }
             //lbMatches.ItemsSource = tmp;
 
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            lbMatches.ItemsSource = db.Matches.ToList();
+            using (MainDB db = new MainDB())
+            {
+                lbMatches.ItemsSource = db.Matches.Include("TeamHome").Include("TeamAway").ToList();
+            }
         }
 
 
@@ -80,8 +98,20 @@ namespace FoolBet
             Match match = (lbMatches.SelectedItem as Match);
             MatchWindow mw = new MatchWindow(match,account);
             mw.ShowDialog();
-            RefreshAccCard(account);
+            //RefreshAccCard(account);
+            GetBets();
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Payment.PayIn pay = new Payment.PayIn();
+            pay.ShowDialog();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Payment.PayOut pay = new Payment.PayOut();
+            pay.ShowDialog();
         }
     }
 }

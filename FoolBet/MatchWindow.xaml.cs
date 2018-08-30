@@ -27,15 +27,19 @@ namespace FoolBet
             MainGrid.Visibility = Visibility.Hidden;
 
             account = acc;
-            this.Title = match.TeamHome.Name + " - " + match.TeamAway.Name;
-            dgMatchCoefs.ItemsSource = match.Coefs;
+            using (MainDB db = new MainDB())
+            {
+                db.Matches.Attach(match);
+                this.Title = match.TeamHome.Name + " - " + match.TeamAway.Name;
+                dgMatchCoefs.ItemsSource = match.Coefs;
+            }
             
         }
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
             
-            e.Handled = Regex.IsMatch(e.Text, "[^0-9.]+");
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9,]+");
             
             
 
@@ -51,8 +55,9 @@ namespace FoolBet
         {
             if(dgMatchCoefs.SelectedItem==null)
                 MainGrid.Visibility = Visibility.Hidden;
-            MainGrid.Visibility = Visibility.Visible;
-
+            
+           MainGrid.Visibility = Visibility.Visible;
+     
             tbValueBet.Text = "0";
             tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();         
             tbNameBet.Text = (dgMatchCoefs.SelectedItem as Coeficient).Name + "  (" + (dgMatchCoefs.SelectedItem as Coeficient).Value + ")";
@@ -60,8 +65,17 @@ namespace FoolBet
 
         private void TbValueBet_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbValueBet.Text != null&& dgMatchCoefs.SelectedItem!=null&&!tbValueBet.Text.Contains(".\0"))
-                tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();
+            try
+            {
+                if (tbValueBet.Text != null && dgMatchCoefs.SelectedItem != null && !tbValueBet.Text.Contains(".\0"))
+                    tbGain.Text = ((dgMatchCoefs.SelectedItem as Coeficient).Value * double.Parse(tbValueBet.Text)).ToString();
+            }
+            catch (Exception)
+            {
+
+                
+            }
+          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -71,11 +85,21 @@ namespace FoolBet
                 MessageBox.Show("Not enough money to make bet");
                 return;
             }
+            if (decimal.Parse(tbValueBet.Text)<3)
+            {
+                MessageBox.Show("Minimal value of bet = 3");
+                return;
+            }
             using (MainDB db = new MainDB())
             {
+                db.Accounts.Attach(account);
+                account.Money -= decimal.Parse(tbValueBet.Text);
+                var coefID = (dgMatchCoefs.SelectedItem as Coeficient).ID;
+                Coeficient cf = db.Coefs.FirstOrDefault(x=>x.ID == coefID);
+               // db.Entry(cf).State = System.Data.Entity.EntityState.Unchanged;
                 UserBet ub = new UserBet()
                 {
-                    Accounts = account, Coef = (dgMatchCoefs.SelectedItem as Coeficient),
+                    Accounts = account, Coef = cf,
                     Price = double.Parse(tbValueBet.Text)
                 };
 

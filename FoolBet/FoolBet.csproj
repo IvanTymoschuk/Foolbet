@@ -46,6 +46,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.1.1101, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.4.1.1101\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="NumericUpDownLib, Version=2.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dirkster.NumericUpDownLib.2.1.1\lib\net4\NumericUpDownLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -82,10 +85,24 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Coeficient.cs" />
+    <Compile Include="Payment\PayIn.xaml.cs">
+      <DependentUpon>PayIn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Payment\PayOut.xaml.cs">
+      <DependentUpon>PayOut.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Signing\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Page Include="MatchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Payment\PayIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Payment\PayOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
